@@ -1,5 +1,34 @@
 # Ruby on Rails on Docker
 
+## テーブルスキーマ
+### モデル名
+- User
+- Task
+- Label
+
+### テーブル構造(カラム名/データ型)
+- User  
+id/integer  
+name/string  
+password/string  
+admin/boolean  
+
+- Task  
+id/integer  
+name/string  
+content/text  
+deadline/date  
+status/integer  
+priority/integer  
+user_id/integer  
+
+- Label
+id/integer  
+name/string  
+task_id/integer
+
+
+
 ## Ruby version
  - [.ruby-version](https://github.com/hihats/ruby-on-rails-pg-on-docker/blob/master/.ruby-version)
 
