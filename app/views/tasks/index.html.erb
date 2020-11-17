@@ -1,0 +1,8 @@
+<div class="tasks">
+    <% @tasks.each do |task| %>
+        <div class="task">
+            <h3><%= task.name %></h3>
+            <p><%= task.content %></p>
+        </div>
+    <% end %>
+</div>
