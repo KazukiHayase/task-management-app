@@ -22,6 +22,23 @@ class TasksController < ApplicationController
     
   end
 
+  def edit
+    @task = Task.find(params[:id])
+  end
+
+  def update
+    @task = Task.find(params[:id])
+    if @task.update_attributes(task_params)
+      redirect_to @task
+      flash[:success] = "タスクの編集が完了しました！"
+    else
+      render "edit"
+    end
+    
+  end
+  
+  
+
 
   private
 
