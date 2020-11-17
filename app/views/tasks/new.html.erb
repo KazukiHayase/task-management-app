@@ -1,0 +1,12 @@
+<h1>タスクの作成</h1>
+<%= form_with model: @task, local: true do |f| %>
+    <div>
+        <%= f.label :name %>
+        <%= f.text_field :name %>
+    </div>
+    <div>
+        <%= f.label :content %>
+        <%= f.text_area :content %>
+    </div>
+    <%= f.submit "作成" %>
+<% end %>
