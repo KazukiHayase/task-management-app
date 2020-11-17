@@ -1,8 +1,10 @@
 <div class="tasks">
     <% @tasks.each do |task| %>
         <div class="task">
+        <%= link_to task_path(task) do %>
             <h3><%= task.name %></h3>
             <p><%= task.content %></p>
+        <% end %>
         </div>
     <% end %>
 </div>
