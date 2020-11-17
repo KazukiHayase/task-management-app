@@ -19,7 +19,6 @@ class TasksController < ApplicationController
     else
       render "new"
     end
-    
   end
 
   def edit
@@ -34,7 +33,12 @@ class TasksController < ApplicationController
     else
       render "edit"
     end
-    
+  end
+  
+  def destroy
+    Task.find(params[:id]).destroy
+    flash[:success] = "タスクの削除が完了しました！"
+    redirect_to tasks_path
   end
   
   
