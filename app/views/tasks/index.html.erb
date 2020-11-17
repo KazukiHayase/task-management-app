@@ -1,10 +1,11 @@
-<div class="tasks">
+<h1>タスク一覧</h1>
+<ul class="tasks">
     <% @tasks.each do |task| %>
-        <div class="task">
+        <li class="task">
         <%= link_to task_path(task) do %>
             <h3><%= task.name %></h3>
             <p><%= task.content %></p>
         <% end %>
-        </div>
+        </li>
     <% end %>
-</div>
+</ul>
