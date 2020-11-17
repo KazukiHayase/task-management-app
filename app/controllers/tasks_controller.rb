@@ -15,11 +15,10 @@ class TasksController < ApplicationController
     @task = Task.new(task_params)
     if @task.save
       redirect_to tasks_path
-      flash[:success] = "タスクの作成が完了しました！"
+      flash[:success] = "タスクを作成しました！"
     else
       render "new"
     end
-    
   end
 
   def edit
@@ -30,11 +29,16 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
     if @task.update_attributes(task_params)
       redirect_to @task
-      flash[:success] = "タスクの編集が完了しました！"
+      flash[:success] = "タスクを編集しました！"
     else
       render "edit"
     end
-    
+  end
+  
+  def destroy
+    Task.find(params[:id]).destroy
+    flash[:success] = "タスクを削除しました！"
+    redirect_to tasks_path
   end
   
   
