@@ -1,16 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe "Tasks", type: :system do
-    let!(:task1) { create(:task) }
-    let!(:task2) { create(:task) }
-    let!(:task3) { create(:task) }
+    let！(:tasks) { create_list(:task, 3) } 
 
     it "タスクが作成日時の降順で並んでいること" do
         visit tasks_path
-        task = all(".task")
+        tasks_view = all(".task")
 
-        expect(task[0].find("h3").text).to eq task3.name
-        expect(task[1].find("h3").text).to eq task2.name
-        expect(task[2].find("h3").text).to eq task1.name
+        expect(tasks_view[0].find("h3").text).to eq tasks[2].name
+        expect(tasks_view[1].find("h3").text).to eq tasks[1].name
+        expect(tasks_view[2].find("h3").text).to eq tasks[0].name
     end
 end
