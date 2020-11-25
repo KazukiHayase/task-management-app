@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe "Tasks", type: :system do
-    let！(:tasks) { create_list(:task, 3) } 
-
+    let!(:tasks) { create_list(:task, 3) } 
+    
     it "タスクが作成日時の降順で並んでいること" do
         visit tasks_path
         tasks_view = all(".task")
