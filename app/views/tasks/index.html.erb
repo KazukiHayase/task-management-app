@@ -1,15 +1,11 @@
 <h1>タスク一覧画面</h1>
-    <ul class="task_list">
-        <li class="element_title">
-            <div class="name">タスク名</div>
-            <div class="content">内容</div>
-            <div class="deadline">締め切り日</div>
-        </li>
-        <% @tasks.each do |task| %>
-            <li class="task_item">
-                <div class="name"><%= link_to task.name, task_path(task) %></div>
-                <div class="content"><%= task.content %></div>
-                <div class="deadline"><%= task.deadline %></div>
-            </li>
-        <% end %>
-    </ul>
+<ul class="task_list">
+    <li class="element_title">
+        <div class="name">タスク名</div>
+        <div class="content">内容</div>
+        <div class="deadline">締め切り日</div>
+    </li>
+    <div id="tasks">
+        <%= render "task", tasks: @tasks %>
+    </div>
+</ul>
