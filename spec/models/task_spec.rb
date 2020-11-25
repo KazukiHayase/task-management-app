@@ -30,6 +30,4 @@ RSpec.describe Task, type: :model do
       is_expected.to be_invalid
     end
   end
-  
-  
 end
