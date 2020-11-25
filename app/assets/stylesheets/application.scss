@@ -28,19 +28,19 @@ body {
 }
 header {
     background-color: #55c500;
-}
-header ul {
-    display: flex;
-    align-items: center;
-    height: 60px;
-    margin: 0 30px;
-}
-header ul li {
-    margin: 0 10px;
-    font-size: 16px;
-}
-header ul li a {
-    color: #fff;
+    ul {
+        display: flex;
+        align-items: center;
+        height: 60px;
+        margin: 0 30px;
+        li {
+            margin: 0 10px;
+            font-size: 16px;
+            a {
+                color: #fff;
+            }
+        }
+    }
 }
 .main {
     width: 80%;
@@ -55,4 +55,11 @@ header ul li a {
     margin: 10px auto 0;
     text-align: center;
     font-size: 30px;
+}
+.error_messages {
+    .error_list {
+        padding: 15px;
+        background-color:#fadddd;
+        font-weight: bold;
+    }
 }
