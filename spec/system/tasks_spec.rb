@@ -1,14 +1,27 @@
 require 'rails_helper'
 
-RSpec.describe "Tasks", type: :system do
-    let!(:tasks) { create_list(:task, 3) } 
+RSpec.describe "Tasks", js: true, type: :system do
+    before do
+        @tasks = create_list(:task, 3)
+    end
+
+    before(:each) do
+        visit tasks_path
+    end
+    
+    subject { first(".task_item .name") }
     
     it "タスクが作成日時の降順で並んでいること" do
-        visit tasks_path
-        tasks_view = all(".task")
+        is_expected.to have_content @tasks[2].name
+    end
 
-        expect(tasks_view[0].find("h3").text).to eq tasks[2].name
-        expect(tasks_view[1].find("h3").text).to eq tasks[1].name
-        expect(tasks_view[2].find("h3").text).to eq tasks[0].name
+    it "タスクが締め切り日の昇順で並んでいること" do
+        sort("締め切り日が近い順")
+        is_expected.to have_content @tasks[0].name
+    end
+
+    it "タスクが締め切り日の降順で並んでいること" do
+        sort("締め切り日が遠い順")
+        is_expected.to have_content @tasks[2].name
     end
 end

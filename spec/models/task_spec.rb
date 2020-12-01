@@ -29,5 +29,10 @@ RSpec.describe Task, type: :model do
       task.content = "a" * 201
       is_expected.to be_invalid
     end
+
+    it "締め切り日が今日よりも前の時" do
+      task.deadline -= 10
+      is_expected.to be_invalid
+    end
   end
 end
