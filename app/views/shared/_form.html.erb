@@ -15,5 +15,12 @@
         <br>
         <%= f.date_field :deadline %>
     </div>
+    <div>
+        <%= f.label :status %>
+        <br>
+        <%= f.select :status, [["未着手", 1],
+                                ["着手中", 2],
+                                ["完了", 3],] %>
+    </div>
     <%= f.submit submit_text %>
 <% end %>
