@@ -50,6 +50,15 @@ class TasksController < ApplicationController
     end
   end
   
+  def search
+    search_params = {keyword: params[:keyword], status:params[:status]}
+    @tasks = Task.search(search_params)
+    
+    respond_to do |format|
+      format.html { redirect_to tasks_path }
+      format.js
+    end
+  end
   
   
 

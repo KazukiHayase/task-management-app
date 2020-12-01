@@ -2,6 +2,9 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.flex {
+    display: flex;
+}
 .link_edit {
     color: blue;
 }
@@ -52,6 +55,21 @@
             h4 {
                 margin: 0 0 5px 0;
             }
+        }
+    }
+}
+#search_tasks_form {
+    margin-bottom: 50px;
+    h4 {
+        margin-bottom: 10px;
+    }
+    label {
+        font-size: 14px;
+    }
+    .flex {
+        margin-bottom: 10px;
+        div {
+            margin-right: 30px;
         }
     }
 }
