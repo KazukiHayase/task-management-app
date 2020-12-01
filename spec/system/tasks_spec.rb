@@ -37,20 +37,22 @@ RSpec.describe "Tasks", js: true, type: :system do
             visit tasks_path
         end
 
+        subject { page } 
+
         it "ステータスで検索" do
             select("着手中", from: "status")
-            expect(page).to  have_content task_doing.name
+            is_expected.to  have_content task_doing.name
         end
 
         it "タイトルで検索" do
             fill_in("キーワード", with: "タスク")
-            expect(page).to  have_content tasks[0].name
+            is_expected.to  have_content tasks[0].name
         end
 
         it "ステータスとタイトルで検索" do
             select("完了", from: "status")
             fill_in("キーワード", with: "タスク")
-            expect(page).to  have_content task_done.name
+            is_expected.to  have_content task_done.name
         end
     end
 end
