@@ -51,7 +51,7 @@ class TasksController < ApplicationController
   end
   
   def search
-    search_params = {keyword: params[:keyword], status:params[:status]}
+    search_params = {keyword: params[:keyword], status: params[:status].to_i}
     @tasks = Task.search(search_params)
     
     respond_to do |format|
@@ -68,6 +68,6 @@ class TasksController < ApplicationController
     def task_params
       params.require(:task).permit(:name, :content, :deadline, :status)
     end
-    
+
   
 end
