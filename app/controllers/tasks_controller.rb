@@ -40,6 +40,16 @@ class TasksController < ApplicationController
     flash[:success] = "タスクを削除しました！"
     redirect_to tasks_path
   end
+
+  def sort
+    sort_number = params[:sort_number].to_i
+    @tasks = sort_tasks(sort_number)
+    respond_to do |format|
+      format.html { redirect_to tasks_path }
+      format.js
+    end
+  end
+  
   
   
 
@@ -47,7 +57,7 @@ class TasksController < ApplicationController
   private
 
     def task_params
-      params.require(:task).permit(:name, :content)
+      params.require(:task).permit(:name, :content, :deadline)
     end
     
   

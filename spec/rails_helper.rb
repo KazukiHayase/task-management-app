@@ -33,7 +33,7 @@ end
 
 # capybaraの設定
 Capybara.register_driver :remote_chrome do |app|
-  url = "http://chrome:4444/wd/hub"
+  url = "http://selenium_chrome:4444/wd/hub"
   caps = ::Selenium::WebDriver::Remote::Capabilities.chrome(
     "goog:chromeOptions" => {
       "args" => [

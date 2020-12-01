@@ -1,0 +1,7 @@
+<% tasks.each do |task| %>
+    <li class="task_item">
+        <div class="name"><%= link_to task.name, task_path(task) %></div>
+        <div class="content"><%= task.content %></div>
+        <div class="deadline"><%= task.deadline %></div>
+    </li>
+<% end %>
