@@ -44,7 +44,6 @@ class TasksController < ApplicationController
   def sort
     sort_number = params[:sort_number].to_i
     @tasks = sort_tasks(sort_number)
-    puts @tasks
     respond_to do |format|
       format.html { redirect_to tasks_path }
       format.js
