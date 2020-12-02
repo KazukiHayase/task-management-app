@@ -3,10 +3,10 @@ class Task < ApplicationRecord
     validates :content, presence: :true, length: {maximum:200}
     validate  :date_not_before_today
 
-    scope :search, -> (search_params) do
+    scope(:search, lambda do |search_params|
         name_like(search_params[:keyword])
             .status_is(search_params[:status])
-    end
+    end)
     scope :name_like, -> (keyword) { where("name LIKE ?", "%#{keyword}%") if keyword.present?}
     scope :status_is, -> (status) { where(status: status) if status.present? && status != 0}
 
