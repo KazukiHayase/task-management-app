@@ -8,7 +8,7 @@ class Task < ApplicationRecord
             .status_is(search_params[:status])
     end
     scope :name_like, -> (keyword) { where("name LIKE ?", "%#{keyword}%") if keyword.present?}
-    scope :status_is, -> (status) { where(status: status) if status.present?}
+    scope :status_is, -> (status) { where(status: status) if status.present? && status != 0}
 
     private
     
