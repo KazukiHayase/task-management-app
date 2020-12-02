@@ -51,7 +51,7 @@ class TasksController < ApplicationController
   end
   
   def search
-    search_params = {keyword: params[:keyword], status: params[:status].to_i}
+    search_params = {keyword: params[:keyword], status: params[:status]}
     @tasks = Task.search(search_params)
     
     respond_to do |format|

@@ -1,0 +1,16 @@
+ja:
+  activerecord:
+    models:
+      task: タスク
+    attributes:
+      task:
+        name: タスク名
+        content: 内容
+        deadline: 締め切り日
+        status: ステータス
+  enums:
+    task:
+      status:
+        not_started: "未着手"
+        doing: "着手中"
+        done: "完了"
