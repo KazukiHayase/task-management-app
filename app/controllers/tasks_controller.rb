@@ -42,8 +42,11 @@ class TasksController < ApplicationController
   end
 
   def sort
-    sort_number = params[:sort_number].to_i
-    @tasks = sort_tasks(sort_number)
+    sort_data = params[:sort_data].split("_")
+    column = sort_column(sort_data[0])
+    direction = sort_direction(sort_data[1])
+    @tasks = Task.sorted_by(column, direction)
+
     respond_to do |format|
       format.html { redirect_to tasks_path }
       format.js

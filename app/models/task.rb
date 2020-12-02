@@ -1,6 +1,6 @@
 class Task < ApplicationRecord
     validates :name, presence: true, length: {maximum: 50}
-    validates :content, presence: :true, length: {maximum:200}
+    validates :content, presence: true, length: {maximum:200}
     validate  :date_not_before_today
 
     enum status: {"not_started": 1, "doing": 2, "done": 3}
@@ -11,6 +11,7 @@ class Task < ApplicationRecord
     }
     scope :name_like, -> (keyword) { where("name LIKE ?", "%#{keyword}%") if keyword.present?}
     scope :status_is, -> (status) { where(status: status) if status.present?}
+    scope :sorted_by, -> (column, direction) { order("#{column} #{direction}")}
 
     private
     

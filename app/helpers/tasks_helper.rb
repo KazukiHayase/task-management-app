@@ -1,10 +1,9 @@
 module TasksHelper
-    def sort_tasks(sort_number)
-        case sort_number
-        when 1
-            Task.all.order(deadline: :ASC)
-        when 2
-            Task.all.order(deadline: :DESC)
-        end
+    def sort_column(column)
+        Task.column_names.include?(column) ? column : "created_at"
+    end
+
+    def sort_direction(direction)
+        %w[asc desc].include?(direction) ? direction : "desc"
     end
 end
