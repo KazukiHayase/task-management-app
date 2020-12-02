@@ -17,7 +17,9 @@
 <% end %>
 <%= form_with url: sort_tasks_path, id: "sort_tasks_form" do |f| %>
     <%= f.select :sort_data, [["締め切り日が近い順", "deadline_asc"],
-                                ["締め切り日が遠い順", "deadline_desc"] ], 
+                                ["締め切り日が遠い順", "deadline_desc"], 
+                                ["優先順位が低い順", "priority_asc"], 
+                                ["優先順位が高い順", "priority_desc"]], 
                                 {include_blank: "並び替え"}, 
                                 {id: "sort_tasks_select"} %>
 <% end %>
