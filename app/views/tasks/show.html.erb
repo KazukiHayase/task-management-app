@@ -15,7 +15,7 @@
         </li>
         <li>
             <h4>ステータス</h4>
-            <div><%= status(@task.status) %></div>
+            <div><%= @task.status_i18n %></div>
         </li>
     </ul>
     <%= link_to "編集", edit_task_path(@task), class: "link_edit" %>
