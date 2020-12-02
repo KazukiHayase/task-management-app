@@ -4,6 +4,7 @@ class Task < ApplicationRecord
     validate  :date_not_before_today
 
     enum status: {"not_started": 1, "doing": 2, "done": 3}
+    enum priority: {"low": 1, "middle": 2, "high": 3}
 
     scope :search, lambda { |search_params|
         name_like(search_params[:keyword])

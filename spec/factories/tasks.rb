@@ -4,6 +4,7 @@ FactoryBot.define do
     content  { "これはタスクの説明です" }
     sequence(:deadline, Date.today)
     status { "not_started" }
+    priority { "low" }
 
     trait :doing do
       status{ "doing" }
