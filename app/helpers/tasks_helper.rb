@@ -6,5 +6,5 @@ module TasksHelper
         when 2
             Task.all.order(deadline: :DESC)
         end
-    end 
+    end
 end
