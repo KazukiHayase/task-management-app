@@ -3,4 +3,5 @@ Rails.application.routes.draw do
 
   resources :tasks 
   post "tasks/sort", to: "tasks#sort", as: "sort_tasks"
+  post "tasks/search", to: "tasks#search", as: "search_tasks"
 end

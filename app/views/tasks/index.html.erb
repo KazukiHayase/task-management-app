@@ -1,4 +1,20 @@
 <h1>タスク一覧画面</h1>
+<%= form_with url: search_tasks_path, id: "search_tasks_form" do |f| %>
+    <h4>検索条件</h4>
+    <div class="flex">
+        <div>
+            <%= f.label :status, "ステータス" %>
+            <br>
+            <%= f.select :status, Task.statuses_i18n.invert,{include_blank: "全て"} %>
+        </div>
+        <div>
+            <%= f.label :keyword, "キーワード" %>
+            <br>
+            <%= f.text_field :keyword %>
+        </div>
+    </div>
+    <%= f.submit "検索" %>
+<% end %>
 <%= form_with url: sort_tasks_path, id: "sort_tasks_form" do |f| %>
     <%= f.select :sort_number, [["締め切り日が近い順", 1],
                                 ["締め切り日が遠い順", 2] ], 
@@ -10,6 +26,7 @@
         <div class="name">タスク名</div>
         <div class="content">内容</div>
         <div class="deadline">締め切り日</div>
+        <div class="status">ステータス</div>
     </li>
     <div id="tasks">
         <%= render "task", tasks: @tasks %>
