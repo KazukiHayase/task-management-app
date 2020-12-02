@@ -3,14 +3,14 @@ FactoryBot.define do
     sequence(:name) { |n| "タスク#{n}" }
     content  { "これはタスクの説明です" }
     sequence(:deadline, Date.today)
-    status {1}
+    status { "not_started" }
 
     trait :doing do
-      status{2}
+      status{ "doing" }
     end
 
     trait :done do
-      status{3}
+      status{ "done" }
     end
   end
 end
