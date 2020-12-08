@@ -1,10 +1,12 @@
 class TasksController < ApplicationController
+  before_action :get_task, only: [:show, :edit, :update]
+
   def index
     @tasks = Task.all.order(created_at: :desc)
   end
 
   def show
-    @task = Task.find(params[:id])
+    
   end
   
   def new
@@ -22,11 +24,10 @@ class TasksController < ApplicationController
   end
 
   def edit
-    @task = Task.find(params[:id])
+
   end
 
   def update
-    @task = Task.find(params[:id])
     if @task.update_attributes(task_params)
       flash[:success] = "タスクを編集しました！"
       redirect_to @task
@@ -79,4 +80,9 @@ class TasksController < ApplicationController
     def sort_direction(direction)
         %w[asc desc].include?(direction) ? direction : "desc"
     end
+
+    def get_task
+      @task = Task.find(params[:id])
+    end
+    
 end
