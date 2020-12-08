@@ -1,12 +1,11 @@
 class TasksController < ApplicationController
-  before_action :get_task, only: [:show, :edit, :update]
+  before_action :get_task, only: [:show, :edit, :update, :destory]
 
   def index
     @tasks = Task.all.order(created_at: :desc)
   end
 
   def show
-    
   end
   
   def new
@@ -24,7 +23,6 @@ class TasksController < ApplicationController
   end
 
   def edit
-
   end
 
   def update
@@ -37,7 +35,7 @@ class TasksController < ApplicationController
   end
   
   def destroy
-    Task.find(params[:id]).destroy
+    @task.destroy
     flash[:success] = "タスクを削除しました！"
     redirect_to tasks_path
   end
@@ -64,9 +62,6 @@ class TasksController < ApplicationController
     end
   end
   
-  
-
-
   private
 
     def task_params
@@ -84,5 +79,4 @@ class TasksController < ApplicationController
     def get_task
       @task = Task.find(params[:id])
     end
-    
 end
