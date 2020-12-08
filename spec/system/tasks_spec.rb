@@ -4,6 +4,8 @@ RSpec.describe "Tasks", js: true, type: :system do
     let(:tasks) { create_list(:task, 3) } 
     let(:task_doing) { create(:task, :doing) } 
     let(:task_done) { create(:task, :done) } 
+    let(:task_low) { create(:task, :low) } 
+    let(:task_high) { create(:task, :high) } 
     
 
     describe "ソート機能" do
@@ -18,14 +20,30 @@ RSpec.describe "Tasks", js: true, type: :system do
             is_expected.to have_content tasks[2].name
         end
 
-        it "タスクが締め切り日の昇順で並んでいること" do
-            sort("締め切り日が近い順")
-            is_expected.to have_content tasks[0].name
+        context "締め切り日の昇順でソートした時" do
+            before {sort("締め切り日が近い順")}
+            it {is_expected.to have_content tasks[0].name}
         end
 
-        it "タスクが締め切り日の降順で並んでいること" do
-            sort("締め切り日が遠い順")
-            is_expected.to have_content tasks[2].name
+        context "締め切り日の降順でソートした時" do
+            before {sort("締め切り日が遠い順")}
+            it {is_expected.to have_content tasks[2].name}
+        end
+
+        context "優先順位の昇順でソートした時" do
+            before do
+                task_low
+                sort("優先順位が低い順")
+            end 
+            it {is_expected.to have_content task_low.name}
+        end
+
+        context "優先順位の降順でソートした時" do
+            before do
+                task_high
+                sort("優先順位が高い順")
+            end
+            it {is_expected.to have_content task_high.name}
         end
     end
 
@@ -39,20 +57,29 @@ RSpec.describe "Tasks", js: true, type: :system do
 
         subject { page } 
 
-        it "ステータスで検索" do
-            select("着手中", from: "status")
-            is_expected.to  have_content task_doing.name
+        context "ステータスで検索した時" do
+            before do 
+                select("着手中", from: "status")
+                click_button "検索"
+            end
+            it {is_expected.to  have_content task_doing.name}
         end
 
-        it "タイトルで検索" do
-            fill_in("キーワード", with: "タスク")
-            is_expected.to  have_content tasks[0].name
+        context "タイトルで検索した時" do
+            before do
+                fill_in("キーワード", with: "タスク")
+                click_button "検索"
+            end
+            it {is_expected.to  have_content tasks[0].name}
         end
 
-        it "ステータスとタイトルで検索" do
-            select("完了", from: "status")
-            fill_in("キーワード", with: "タスク")
-            is_expected.to  have_content task_done.name
+        context "ステータスとタイトルで検索した時" do
+            before do
+                select("完了", from: "status")
+                fill_in("キーワード", with: "タスク")
+                click_button "検索"
+            end
+            it {is_expected.to  have_content task_done.name}
         end
     end
 end

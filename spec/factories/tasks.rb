@@ -4,14 +4,22 @@ FactoryBot.define do
     content  { "これはタスクの説明です" }
     sequence(:deadline, Date.today)
     status { :not_started }
-    priority { :low }
+    priority { :middle }
 
     trait :doing do
-      status{ :doing }
+      status { :doing }
     end
 
     trait :done do
-      status{ :done }
+      status { :done }
+    end
+
+    trait :low do
+      priority { :low }
+    end
+
+    trait :high do
+      priority { :high }
     end
   end
 end
