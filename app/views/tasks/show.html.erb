@@ -17,6 +17,10 @@
             <h4>ステータス</h4>
             <div><%= @task.status_i18n %></div>
         </li>
+        <li>
+            <h4>優先順位</h4>
+            <div><%= @task.priority_i18n %></div>
+        </li>
     </ul>
     <%= link_to "編集", edit_task_path(@task), class: "link_edit" %>
     <%= link_to "削除", @task, method: :delete, class: "link_delete", data: {confirm: "本当に削除しますか？"} %>

@@ -1,10 +1,11 @@
 class TasksController < ApplicationController
+  before_action :get_task, only: [:show, :edit, :update, :destory]
+
   def index
-    @tasks = Task.all.order(created_at: "DESC")
+    @tasks = Task.all.order(created_at: :desc)
   end
 
   def show
-    @task = Task.find(params[:id])
   end
   
   def new
@@ -22,11 +23,9 @@ class TasksController < ApplicationController
   end
 
   def edit
-    @task = Task.find(params[:id])
   end
 
   def update
-    @task = Task.find(params[:id])
     if @task.update_attributes(task_params)
       flash[:success] = "タスクを編集しました！"
       redirect_to @task
@@ -36,14 +35,17 @@ class TasksController < ApplicationController
   end
   
   def destroy
-    Task.find(params[:id]).destroy
+    @task.destroy
     flash[:success] = "タスクを削除しました！"
     redirect_to tasks_path
   end
 
   def sort
-    sort_number = params[:sort_number].to_i
-    @tasks = sort_tasks(sort_number)
+    sort_data = params[:sort_data].split("_")
+    column = sort_column(sort_data[0])
+    direction = sort_direction(sort_data[1])
+    @tasks = Task.sorted_by(column, direction)
+
     respond_to do |format|
       format.html { redirect_to tasks_path }
       format.js
@@ -60,14 +62,21 @@ class TasksController < ApplicationController
     end
   end
   
-  
-
-
   private
 
     def task_params
-      params.require(:task).permit(:name, :content, :deadline, :status)
+      params.require(:task).permit(:name, :content, :deadline, :status, :priority)
     end
 
-  
+    def sort_column(column)
+        Task.column_names.include?(column) ? column : "created_at"
+    end
+
+    def sort_direction(direction)
+        %w[asc desc].include?(direction) ? direction : "desc"
+    end
+
+    def get_task
+      @task = Task.find(params[:id])
+    end
 end
