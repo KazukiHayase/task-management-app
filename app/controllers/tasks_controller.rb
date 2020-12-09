@@ -1,4 +1,5 @@
 class TasksController < ApplicationController
+  before_action :logged_in_user
   before_action :get_task, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -84,5 +85,12 @@ class TasksController < ApplicationController
 
     def get_task
       @task = Task.find(params[:id])
+    end
+
+    def logged_in_user
+      unless logged_in?
+        flash[:warnig] = "ログインしてください"
+        redirect_to login_path
+      end
     end
 end
