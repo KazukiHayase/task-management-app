@@ -5,6 +5,7 @@ FactoryBot.define do
     sequence(:deadline, Date.today)
     status { :not_started }
     priority { :middle }
+    user { FactoryBot.create(:user) }
 
     trait :doing do
       status { :doing }

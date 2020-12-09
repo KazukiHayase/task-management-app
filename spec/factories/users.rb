@@ -1,8 +1,9 @@
 FactoryBot.define do
   factory :user do
-    name { "MyString" }
-    email { "MyString" }
-    remember_token { "MyString" }
+    sequence(:name) { |n| "ユーザー#{n}" }
+    sequence(:email) { |n| "user#{n}@test.com" }
+    password { "password" }
+    password_confirmation { "password" }
     admin { false }
   end
 end
