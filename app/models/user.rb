@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+    has_many :tasks, dependent: :destroy
     validates :name, presence: true, length: {maximum: 50}
     VALID_EMAIL_REGEX = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
     validates :email, presence: true, length: {maximum: 50}, format: {with: VALID_EMAIL_REGEX}, uniqueness: true
