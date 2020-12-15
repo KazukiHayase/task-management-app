@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
   def create
     if @user.authenticate(params[:session][:password])
       login(@user)
-      params[:session][:remember_me] = "1" ? remember(@user) : forget(@user)
+      params[:session][:remember_me] == "1" ? remember(@user) : forget(@user)
       flash[:success] = "ログインしました"
       redirect_to tasks_path
     else
