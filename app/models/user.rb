@@ -10,4 +10,28 @@ class User < ApplicationRecord
 
     # その他
     has_secure_password validations: true
+    attr_accessor :remember_token
+
+    def self.new_token
+        SecureRandom.urlsafe_base64
+    end
+
+    def self.digest(token)
+        cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engne::MIN_COST : BCrypt::Engine.cost
+        BCrypt::Password.create(token, const: cost)
+    end
+
+    def remember
+        self.remember_token = User.new_token
+        update_attribute(:remember_digest, User.digest(remember_token))
+    end
+
+    def forget
+        update_attribute(:remember_digest, nil)
+    end
+    
+    def authenticated?(remember_token)
+        return false if remember_digest.nil?
+        BCrypt::Password.new(remember_token).is_password?(remember_token)
+    end
 end

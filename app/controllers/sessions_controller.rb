@@ -7,10 +7,11 @@ class SessionsController < ApplicationController
   def create
     if @user.authenticate(params[:session][:password])
       login(@user)
+      params[:session][:remember_me] = "1" ? remember(@user) : forget(@user)
       flash[:success] = "ログインしました"
       redirect_to tasks_path
     else
-      flash.now[:warnig] = "パスワードが違います"
+      flash.now[:danger] = "パスワードが違います"
       render "new"
     end
   end
@@ -25,7 +26,7 @@ class SessionsController < ApplicationController
 
   def get_user
     unless @user = User.find_by(email: params[:session][:email])
-      flash.now[:warnig] = "登録されてないメールアドレスです"
+      flash.now[:danger] = "登録されてないメールアドレスです"
       render "new"
     end
   end
