@@ -19,3 +19,10 @@ ja:
         low: "低"
         middle: "中"
         high: "高"
+  views:
+    pagination:
+      first: "&laquo; 最初"
+      last: "最後 &raquo;"
+      previous: "&lsaquo; 前"
+      next: "次 &rsaquo;"
+      truncate: "..."
