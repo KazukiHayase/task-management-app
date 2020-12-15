@@ -1,6 +1,14 @@
 <header>
     <ul>
-        <li class="nav_item"><%= link_to "タスク一覧", tasks_path  %></li>
-        <li class="nav_item"><%= link_to "タスク作成", new_task_path  %></li>
+        <li class="logo">TaskTool</li>
+        <div class="flex">
+            <li class="nav_item"><%= link_to "タスク一覧", tasks_path  %></li>
+            <li class="nav_item"><%= link_to "タスク作成", new_task_path  %></li>
+            <% if logged_in? %>
+                <li class="nav_item"><%= link_to "ログアウト", logout_path, method: :delete %></li>
+            <% else %>
+                <li class="nav_item"><%= link_to "ログイン", login_path %></li>
+            <% end %>
+        </div>
     </ul>
 </header>

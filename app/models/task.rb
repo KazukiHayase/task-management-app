@@ -8,12 +8,21 @@ class Task < ApplicationRecord
     enum priority: {"low": 1, "middle": 2, "high": 3}
 
     scope :search, lambda { |search_params|
-        name_like(search_params[:keyword])
+        user_is(search_params[:user])
+            .name_like(search_params[:keyword])
             .status_is(search_params[:status])
+    }
+    scope :sorted_by, lambda { |sort_params|
+        user_is(sort_params[:user])
+            .order("#{sort_params[:column]} #{sort_params[:direction]}")
+    }
+    scope :recent, lambda { |user|
+        user_is(user)
+            .order(created_at: :desc)
     }
     scope :name_like, -> (keyword) { where("name LIKE ?", "%#{keyword}%") if keyword.present?}
     scope :status_is, -> (status) { where(status: status) if status.present?}
-    scope :sorted_by, -> (column, direction) { order("#{column} #{direction}")}
+    scope :user_is, -> (user) { where(user_id: user) if user.present? }
 
     private
     

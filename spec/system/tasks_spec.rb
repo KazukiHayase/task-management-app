@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "Tasks", js: true, type: :system do
+    let(:user) { create(:user) } 
     let(:tasks) { create_list(:task, 3) } 
     let(:task_doing) { create(:task, :doing) } 
     let(:task_done) { create(:task, :done) } 
@@ -10,6 +11,7 @@ RSpec.describe "Tasks", js: true, type: :system do
 
     describe "ソート機能" do
         before do
+            login user
             tasks
             visit tasks_path
         end
@@ -49,6 +51,7 @@ RSpec.describe "Tasks", js: true, type: :system do
 
     describe "検索機能" do
         before do
+            login user
             tasks
             task_doing
             task_done

@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 2020_12_09_031050) do
   create_table "users", force: :cascade do |t|
     t.string "name", null: false
     t.string "email", null: false
-    t.string "remember_token"
+    t.string "remember_digest"
     t.string "password_digest"
     t.boolean "admin", default: false, null: false
     t.datetime "created_at", null: false

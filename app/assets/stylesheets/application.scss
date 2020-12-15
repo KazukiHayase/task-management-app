@@ -14,6 +14,7 @@
  *= require_self
  */
 @import "bootstrap";
+@import url('https://fonts.googleapis.com/css2?family=Griffy&display=swap');
 
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     font-weight: bold;
@@ -36,17 +37,24 @@ body {
     margin: 0;
 }
 header {
+    font-family: 'Griffy', cursive;
     background-color: #55c500;
     ul {
         display: flex;
+        justify-content: space-between;
         align-items: center;
         height: 60px;
         margin: 0 30px;
+        color: #fff;
         li {
             margin: 0 10px;
             font-size: 16px;
             a {
                 color: #fff;
+            }
+            &.logo {
+                font-size: 40px;
+                font-weight: bold;
             }
         }
     }
