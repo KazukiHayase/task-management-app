@@ -1,9 +1,9 @@
 class TasksController < ApplicationController
-  before_action :logged_in_user
+  before_action :require_login
   before_action :get_task, only: [:show, :edit, :update, :destroy]
 
   def index
-    @tasks = Task.all.order(created_at: :desc).page(params[:page])
+    @tasks = @current_user.tasks.order(created_at: :desc).page(params[:page])
     respond_to do |format|
       format.html
       format.js
@@ -49,7 +49,7 @@ class TasksController < ApplicationController
     sort_data = params[:sort_data].split("_")
     column = sort_column(sort_data[0])
     direction = sort_direction(sort_data[1])
-    @tasks = Task.sorted_by(column, direction).page(params[:page])
+    @tasks = @current_user.tasks.sorted_by(column, direction).page(params[:page])
     @paginate_method = :post
 
     respond_to do |format|
@@ -60,7 +60,7 @@ class TasksController < ApplicationController
   
   def search
     search_params = {keyword: params[:keyword], status: params[:status]}
-    @tasks = Task.search(search_params).page(params[:page])
+    @tasks = @current_user.tasks.search(search_params).page(params[:page])
     @paginate_method = :post
     
     respond_to do |format|
@@ -87,7 +87,7 @@ class TasksController < ApplicationController
       @task = Task.find(params[:id])
     end
 
-    def logged_in_user
+    def require_login
       unless logged_in?
         flash[:danger] = "ログインしてください"
         redirect_to login_path
