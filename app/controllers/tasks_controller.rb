@@ -3,7 +3,7 @@ class TasksController < ApplicationController
   before_action :get_task, only: [:show, :edit, :update, :destroy]
 
   def index
-    @tasks = @current_user.tasks.order(created_at: :desc).page(params[:page])
+    @tasks = Task.user_is(current_user).order(created_at: :desc).page(params[:page])
     respond_to do |format|
       format.html
       format.js
@@ -49,7 +49,7 @@ class TasksController < ApplicationController
     sort_data = params[:sort_data].split("_")
     column = sort_column(sort_data[0])
     direction = sort_direction(sort_data[1])
-    @tasks = @current_user.tasks.sorted_by(column, direction).page(params[:page])
+    @tasks = Task.user_is(current_user).sorted_by(column, direction).page(params[:page])
     @paginate_method = :post
 
     respond_to do |format|
@@ -60,7 +60,7 @@ class TasksController < ApplicationController
   
   def search
     search_params = {keyword: params[:keyword], status: params[:status]}
-    @tasks = @current_user.tasks.search(search_params).page(params[:page])
+    @tasks = Task.user_is(current_user).search(search_params).page(params[:page])
     @paginate_method = :post
     
     respond_to do |format|

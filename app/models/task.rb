@@ -14,6 +14,7 @@ class Task < ApplicationRecord
     scope :name_like, -> (keyword) { where("name LIKE ?", "%#{keyword}%") if keyword.present?}
     scope :status_is, -> (status) { where(status: status) if status.present?}
     scope :sorted_by, -> (column, direction) { order("#{column} #{direction}")}
+    scope :user_is, -> (user) { where(user_id: user) }
 
     private
     
