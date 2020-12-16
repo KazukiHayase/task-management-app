@@ -1,6 +1,12 @@
 class UsersController < ApplicationController
+    before_action :get_user, only: [:show]
+
     def index
         @users = User.all.includes(:tasks)
+    end
+
+    def show
+        @tasks = @user.tasks.page(params[:page])
     end
     
     def new
@@ -21,5 +27,9 @@ class UsersController < ApplicationController
 
     def user_params
         params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    end
+
+    def get_user
+        @user = User.find(params[:id])
     end
 end
