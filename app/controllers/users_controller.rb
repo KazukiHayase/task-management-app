@@ -2,7 +2,7 @@ class UsersController < ApplicationController
     before_action :get_user, only: [:show, :edit, :update, :destroy]
 
     def index
-        @users = User.all.includes(:tasks)
+        @users = User.preload(:tasks)
     end
 
     def show
