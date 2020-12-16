@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-    before_action :get_user, only: [:show]
+    before_action :get_user, only: [:show, :edit, :update]
 
     def index
         @users = User.all.includes(:tasks)
@@ -20,6 +20,18 @@ class UsersController < ApplicationController
             redirect_to users_path
         else
             render "new"
+        end
+    end
+
+    def edit
+    end
+    
+    def update
+        if @user.update_attributes(user_params)
+            flash[:success] = "ユーザーを編集しました！"
+            redirect_to users_path
+        else
+            render "edit"
         end
     end
     
