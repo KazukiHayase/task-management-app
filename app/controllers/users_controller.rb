@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
     before_action :get_user, only: [:show, :edit, :update, :destroy]
+    before_action :admin_user
 
     def index
         @users = User.preload(:tasks)
@@ -51,5 +52,9 @@ class UsersController < ApplicationController
 
     def get_user
         @user = User.find(params[:id])
+    end
+
+    def admin_user
+        raise ApplicationError::NotPermittedError unless current_user.admin?
     end
 end
