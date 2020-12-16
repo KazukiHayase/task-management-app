@@ -12,6 +12,11 @@
         <%= f.email_field :email %>
     </div>
     <div>
+        <%= f.label :admin %>
+        <br>
+        <%= f.select :admin, User.admins_i18n.invert %>
+    </div>
+    <div>
         <%= f.label :password %>
         <br>
         <%= f.password_field :password %>
