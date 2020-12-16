@@ -1,0 +1,5 @@
+<li class="user_item">
+    <div class="name"><%= link_to user.name, user_path(user) %></div>
+    <div class="email"><%= user.email %></div>
+    <div class="task_count"><%= user.tasks.size %></div>
+</li>
