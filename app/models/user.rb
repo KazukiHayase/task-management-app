@@ -8,6 +8,9 @@ class User < ApplicationRecord
     # アソシエーション
     has_many :tasks, dependent: :destroy
 
+    # コールバック
+    before_destroy :must_have_at_least_one_admin_user
+
     # その他
     has_secure_password validations: true
     attr_accessor :remember_token
@@ -34,5 +37,9 @@ class User < ApplicationRecord
     def authenticated?(remember_token)
         return false if remember_digest.nil?
         BCrypt::Password.new(remember_token).is_password?(remember_token)
+    end
+
+    def must_have_at_least_one_admin_user
+        throw :abort unless User.where(admin: true).count > 1
     end
 end
