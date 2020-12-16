@@ -1,0 +1,13 @@
+<h1><%= @user.name %>のタスク一覧</h1>
+<ul class="task_list mt-5">
+    <li class="element_title">
+        <div class="name">タスク名</div>
+        <div class="content">内容</div>
+        <div class="deadline">締め切り日</div>
+        <div class="status">ステータス</div>
+        <div class="priority">優先順位</div>
+    </li>
+    <div id="tasks">
+        <%= render "users/task", tasks: @tasks %>
+    </div>
+</ul>

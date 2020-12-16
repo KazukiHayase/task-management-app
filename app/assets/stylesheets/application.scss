@@ -26,6 +26,10 @@ input, button, select, optgroup, textarea {
 a {
     color: #000;
     text-decoration: none;
+    &:hover {
+        color: initial;
+        text-decoration: none;
+    }
 }
 ul {
     padding: 0;
@@ -37,14 +41,16 @@ body {
     margin: 0;
 }
 header {
-    font-family: 'Griffy', cursive;
+    width: 100%;
+    position: fixed;
+    top: 0;
     background-color: #55c500;
     ul {
         display: flex;
         justify-content: space-between;
         align-items: center;
         height: 60px;
-        margin: 0 30px;
+        margin: 0 50px;
         color: #fff;
         li {
             margin: 0 10px;
@@ -53,15 +59,21 @@ header {
                 color: #fff;
             }
             &.logo {
+                font-family: 'Griffy', cursive;
                 font-size: 40px;
                 font-weight: bold;
+            }
+            &:hover {
+                cursor: pointer;
+                color: #000;
             }
         }
     }
 }
 .main {
     width: 80%;
-    margin: 0 auto 100px;
+    padding-top: 30px;
+    margin: 60px auto 100px;
 }
 .flash {
     display: flex;
@@ -79,4 +91,10 @@ header {
         background-color:#fadddd;
         font-weight: bold;
     }
+}
+.link_edit {
+    color: blue;
+}
+.link_delete {
+    color: red;
 }

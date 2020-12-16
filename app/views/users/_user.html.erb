@@ -1,0 +1,13 @@
+<li class="user_item">
+    <div class="flex">
+        <div class="name"><%= link_to user.name, user_path(user) %></div>
+        <div class="email"><%= user.email %></div>
+        <div class="task_count"><%= user.tasks.size %></div>
+    </div>
+    <div>
+        <%= link_to "編集", edit_user_path(user), class: "link_edit" %>
+        <% unless user == current_user %>
+            <%= link_to "削除", user, method: :delete, class: "link_delete", data: {confirm: "本当に削除しますか？"} %>
+        <% end %>
+    </div>
+</li>
