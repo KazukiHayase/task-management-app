@@ -17,3 +17,7 @@
 //= require popper
 //= require bootstrap-sprockets
 //= require_tree .
+
+$(document).ready(function(){
+    setTimeout("$('.flash').fadeOut(2000)", 1000) 
+});
