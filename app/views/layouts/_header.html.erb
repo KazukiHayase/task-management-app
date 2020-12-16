@@ -3,19 +3,21 @@
         <li class="logo">TaskTool</li>
         <div class="flex">
             <% if logged_in? %>
-                <li class="nav_item dropdown">
-                    <a type="button" id="dropdown"
-                            class="dropdown-toggle"
-                            data-toggle="dropdown"
-                            aria-haspopup="true"
-                            aria-expanded="false">
-                            管理メニュー
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="dropdown">
-                        <%= link_to "ユーザー一覧", users_path, class: "dropdown-item" %>
-                        <%= link_to "ユーザー作成", new_user_path, class: "dropdown-item" %>
-                    </div>
-                </li>
+                <% if current_user.admin? %>
+                    <li class="nav_item dropdown">
+                        <a type="button" id="dropdown"
+                                class="dropdown-toggle"
+                                data-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false">
+                                管理メニュー
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdown">
+                            <%= link_to "ユーザー一覧", users_path, class: "dropdown-item" %>
+                            <%= link_to "ユーザー作成", new_user_path, class: "dropdown-item" %>
+                        </div>
+                    </li>
+                <% end %>
                 <li class="nav_item dropdown">
                     <a type="button" id="dropdown2"
                             class="dropdown-toggle"
