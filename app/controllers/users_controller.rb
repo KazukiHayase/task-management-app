@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-    before_action :get_user, only: [:show, :edit, :update]
+    before_action :get_user, only: [:show, :edit, :update, :destroy]
 
     def index
         @users = User.all.includes(:tasks)
@@ -32,6 +32,14 @@ class UsersController < ApplicationController
             redirect_to users_path
         else
             render "edit"
+        end
+    end
+    
+    def destroy
+        unless @user == current_user
+            @user.destroy
+            flash[:success] = "ユーザーを削除しました！"
+            redirect_to users_path
         end
     end
     
