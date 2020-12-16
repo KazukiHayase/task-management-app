@@ -2,23 +2,34 @@
     <ul>
         <li class="logo">TaskTool</li>
         <div class="flex">
-            <li class="nav_item"><%= link_to "タスク一覧", tasks_path  %></li>
-            <li class="nav_item"><%= link_to "タスク作成", new_task_path  %></li>
-            <li class="nav_item dropdown">
-                <a type="button" id="dropdown"
-                        class="dropdown-toggle"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false">
-                        管理メニュー
-                </a>
-                <div class="dropdown-menu" aria-labelledby="dropdown">
-                    <%= link_to "ユーザー一覧", users_path, class: "dropdown-item" %>
-                    <%= link_to "ユーザー作成", new_user_path, class: "dropdown-item" %>
-                </div>
-            </li>
             <% if logged_in? %>
-                <li class="nav_item"><%= link_to "ログアウト", logout_path, method: :delete %></li>
+                <li class="nav_item dropdown">
+                    <a type="button" id="dropdown"
+                            class="dropdown-toggle"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false">
+                            管理メニュー
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown">
+                        <%= link_to "ユーザー一覧", users_path, class: "dropdown-item" %>
+                        <%= link_to "ユーザー作成", new_user_path, class: "dropdown-item" %>
+                    </div>
+                </li>
+                <li class="nav_item dropdown">
+                    <a type="button" id="dropdown2"
+                            class="dropdown-toggle"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false">
+                            <%= current_user.name %>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown2">
+                        <%= link_to "タスク一覧", tasks_path, class: "dropdown-item"  %>
+                        <%= link_to "タスク作成", new_task_path, class: "dropdown-item"  %>
+                        <%= link_to "ログアウト", logout_path, method: :delete, class: "dropdown-item" %>
+                    </div>
+                </li>
             <% else %>
                 <li class="nav_item"><%= link_to "ログイン", login_path %></li>
             <% end %>
