@@ -11,6 +11,7 @@ class User < ApplicationRecord
     # その他
     has_secure_password validations: true
     attr_accessor :remember_token
+    enum admin: {"admin": true, "not_admin": false}
 
     def self.new_token
         SecureRandom.urlsafe_base64

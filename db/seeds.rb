@@ -12,5 +12,5 @@ User.create!(
     email: "kazuki@gmail.com",
     password: "password",
     password_confirmation: "password",
-    admin: true
+    admin: "admin"
 )
