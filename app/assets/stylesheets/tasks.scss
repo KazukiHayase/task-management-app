@@ -18,6 +18,7 @@
     }
     .task_item {
         display: flex;
+        align-items: center;
         padding: 10px 0;
         border-left: 1px solid #9e9e9e;
         border-right: 1px solid #9e9e9e;
@@ -43,9 +44,17 @@
     .priority {
         width: 100px;
     }
+    .labels {
+        width: 250px;
+    }
     .pagination {
         margin-top: 30px;
         justify-content: center;
+    }
+}
+#task_form {
+    label {
+        margin-right: 15px;
     }
 }
 .task_show {
@@ -73,4 +82,14 @@
             margin-right: 30px;
         }
     }
+}
+.label {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    height: 28px;
+    padding: 0 15px;
+    border-radius: 14px;
+    color: #fff;
+    background-color: #0052cc;
 }
