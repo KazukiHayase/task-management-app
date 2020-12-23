@@ -45,7 +45,7 @@
         width: 100px;
     }
     .labels {
-        width: 250px;
+        flex: 1;
     }
     .pagination {
         margin-top: 30px;
@@ -89,6 +89,7 @@
     justify-content: center;
     align-items: center;
     height: 28px;
+    margin-bottom: 5px;
     padding: 0 15px;
     border-radius: 14px;
     color: #fff;
