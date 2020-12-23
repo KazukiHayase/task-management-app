@@ -4,6 +4,17 @@ class LabelsController < ApplicationController
         @labels = Label.all
     end
 
+    def create
+        @label = Label.new(label_params)
+        @labels = Label.all
+        if @label.save
+            flash[:success] = "ラベルを作成しました！"
+            redirect_to labels_path
+        else
+            render "index"
+        end
+    end
+
     def destroy
         label = Label.find(params[:id])
         label.destroy
