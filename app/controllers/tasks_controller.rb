@@ -3,7 +3,7 @@ class TasksController < ApplicationController
   before_action :get_task, only: [:show, :edit, :update, :destroy]
 
   def index
-    @tasks = Task.recent(current_user).page(params[:page])
+    @tasks = Task.preload(:labels).recent(current_user).page(params[:page])
     respond_to do |format|
       format.html
       format.js
