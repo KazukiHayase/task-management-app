@@ -7,7 +7,7 @@ class Task < ApplicationRecord
     enum status: {"not_started": 1, "doing": 2, "done": 3}
     enum priority: {"low": 1, "middle": 2, "high": 3}
 
-    has_many :labelings
+    has_many :labelings, dependent: :destroy
     has_many :labels, through: :labelings
 
     scope :search, lambda { |search_params|
