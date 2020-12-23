@@ -14,6 +14,7 @@ class Task < ApplicationRecord
         user_is(search_params[:user])
             .name_like(search_params[:keyword])
             .status_is(search_params[:status])
+            .has_labels(search_params[:label_ids])
     }
     scope :sorted_by, lambda { |sort_params|
         user_is(sort_params[:user])
@@ -23,10 +24,10 @@ class Task < ApplicationRecord
         user_is(user)
             .order(created_at: :desc)
     }
-    scope :name_like, -> (keyword) { where("name LIKE ?", "%#{keyword}%") if keyword.present?}
+    scope :name_like, -> (keyword) { where("tasks.name LIKE ?", "%#{keyword}%") if keyword.present?}
     scope :status_is, -> (status) { where(status: status) if status.present?}
     scope :user_is, -> (user) { where(user_id: user) if user.present? }
-    scope :has_label, -> (labels) { eager_load(:labels).where(labels: {id: labels}) }
+    scope :has_labels, -> (labels) { joins(:labels).where(labels: {id: labels}).distinct if labels.present? }
 
     private
     
