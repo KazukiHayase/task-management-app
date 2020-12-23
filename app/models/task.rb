@@ -7,6 +7,9 @@ class Task < ApplicationRecord
     enum status: {"not_started": 1, "doing": 2, "done": 3}
     enum priority: {"low": 1, "middle": 2, "high": 3}
 
+    has_many :labelings
+    has_many :labels, through: :labelings
+
     scope :search, lambda { |search_params|
         user_is(search_params[:user])
             .name_like(search_params[:keyword])
@@ -23,6 +26,7 @@ class Task < ApplicationRecord
     scope :name_like, -> (keyword) { where("name LIKE ?", "%#{keyword}%") if keyword.present?}
     scope :status_is, -> (status) { where(status: status) if status.present?}
     scope :user_is, -> (user) { where(user_id: user) if user.present? }
+    scope :has_label, -> (labels) { eager_load(:labels).where(labels: {id: labels}) }
 
     private
     
