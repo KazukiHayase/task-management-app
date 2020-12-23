@@ -50,7 +50,7 @@ class TasksController < ApplicationController
     column = sort_column(sort_data[0])
     direction = sort_direction(sort_data[1])
     sort_params = {user: current_user, column: column, direction: direction}
-    @tasks = Task.sorted_by(sort_params).page(params[:page])
+    @tasks = Task.preload(:labels).sorted_by(sort_params).page(params[:page])
     @paginate_method = :post
 
     respond_to do |format|
