@@ -1,0 +1,10 @@
+<h1>ラベル一覧画面</h1>
+<%= form_with model: @label do |f| %>
+    <%= f.text_field :name %>
+    <%= f.submit "ラベル追加" %>
+<% end %>
+<div id="labels">
+    <ul class="label_list mt-2">
+        <%= render 'labels/label', labels: @labels %>
+    </ul>
+</div>
