@@ -21,6 +21,14 @@
             <h4>優先順位</h4>
             <div><%= @task.priority_i18n %></div>
         </li>
+        <li>
+            <h4>ラベル</h4>
+            <% @task.labels.each do |label| %>
+                <div class="label">
+                    <%= label.name %>
+                </div>
+            <% end %>
+        </li>
     </ul>
     <%= link_to "編集", edit_task_path(@task), class: "link_edit" %>
     <%= link_to "削除", @task, method: :delete, class: "link_delete", data: {confirm: "本当に削除しますか？"} %>
