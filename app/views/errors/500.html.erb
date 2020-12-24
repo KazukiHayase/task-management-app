@@ -1,0 +1,8 @@
+<h2>Internal Server Error</h2>
+<p>アクセスしようとしたページは表示できませんでした</p>
+
+<% if logged_in? %>
+    <u><%= link_to "タスク一覧ページへ戻る", tasks_path %></u>
+<% else %>
+    <u><%= link_to "ログイン画面へ", login_path %></u>
+<% end %>
