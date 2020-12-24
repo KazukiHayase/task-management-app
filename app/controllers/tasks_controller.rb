@@ -63,7 +63,8 @@ class TasksController < ApplicationController
     search_params = {user: current_user, 
                       keyword: params[:keyword], 
                       status: params[:status], 
-                      label_ids: params[:label_ids]}
+                      label_ids: params[:label_ids]
+                    }
     @tasks = Task.preload(:labels).search(search_params).page(params[:page])
     @paginate_method = :post
     
