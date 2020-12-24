@@ -25,10 +25,7 @@ module ErrorsHandler
         end
 
         def render_500(e = nil)
-            if e
-                logger.error "Rendering 500 with exception: #{e.message}"
-                @message = e.message
-            end
+            logger.error "Rendering 500 with exception: #{e.message}" if e
             
             if request.format.to_sym == :json
                 render json: { error: '500 error' }, status: :internal_server_error
