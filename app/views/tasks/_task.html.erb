@@ -5,6 +5,13 @@
         <div class="deadline"><%= task.deadline %></div>
         <div class="status"><%= task.status_i18n %></div>
         <div class="priority"><%= task.priority_i18n %></div>
+        <div class="labels">
+            <% task.labels.each do |label| %>
+                <div class="label">
+                    <%= label.name %>
+                </div>
+            <% end %>
+        </div>
     </li>
 <% end %>
 <%= paginate tasks, remote: true %>

@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     end
 
     def show
-        @tasks = @user.tasks.page(params[:page])
+        @tasks = Task.preload(:labels).user_is(@user).page(params[:page])
     end
     
     def new

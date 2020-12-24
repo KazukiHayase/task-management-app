@@ -3,7 +3,8 @@ class TasksController < ApplicationController
   before_action :get_task, only: [:show, :edit, :update, :destroy]
 
   def index
-    @tasks = Task.recent(current_user).page(params[:page])
+    @tasks = Task.preload(:labels).recent(current_user).page(params[:page])
+
     respond_to do |format|
       format.html
       format.js
@@ -50,7 +51,7 @@ class TasksController < ApplicationController
     column = sort_column(sort_data[0])
     direction = sort_direction(sort_data[1])
     sort_params = {user: current_user, column: column, direction: direction}
-    @tasks = Task.sorted_by(sort_params).page(params[:page])
+    @tasks = Task.preload(:labels).sorted_by(sort_params).page(params[:page])
     @paginate_method = :post
 
     respond_to do |format|
@@ -60,8 +61,13 @@ class TasksController < ApplicationController
   end
   
   def search
-    search_params = {user: current_user, keyword: params[:keyword], status: params[:status]}
-    @tasks = Task.search(search_params).page(params[:page])
+    search_params = {user: current_user, 
+                      keyword: params[:keyword], 
+                      status: params[:status], 
+                      label_ids: params[:label_ids]
+                    }
+                    
+    @tasks = Task.preload(:labels).search(search_params).page(params[:page])
     @paginate_method = :post
     
     respond_to do |format|
@@ -73,7 +79,7 @@ class TasksController < ApplicationController
   private
 
     def task_params
-      params.require(:task).permit(:name, :content, :deadline, :status, :priority)
+      params.require(:task).permit(:name, :content, :deadline, :status, :priority, label_ids: [])
     end
 
     def sort_column(column)

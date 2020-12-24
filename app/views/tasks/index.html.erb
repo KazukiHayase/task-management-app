@@ -13,6 +13,11 @@
             <%= f.text_field :keyword %>
         </div>
     </div>
+    <div>
+        <%= f.label :label, "ラベル" %>
+        <br>
+        <%= f.collection_check_boxes :label_ids, Label.all, :id, :name, include_hidden: false %>
+    </div>
     <%= f.submit "検索" %>
 <% end %>
 <%= form_with url: sort_tasks_path, id: "sort_tasks_form" do |f| %>
@@ -30,6 +35,7 @@
         <div class="deadline">締め切り日</div>
         <div class="status">ステータス</div>
         <div class="priority">優先順位</div>
+        <div class="labels">ラベル</div>
     </li>
     <div id="tasks">
         <%= render "task", tasks: @tasks %>

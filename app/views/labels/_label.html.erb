@@ -1,0 +1,6 @@
+<% @labels.each do |label| %>
+    <li class="label_item">
+        <div class="name"><%= label.name %></div>
+        <%= link_to "×", label, method: :delete, class: "link_delete", data: {confirm: "本当に削除しますか？"} %>
+    </li>
+<% end %>
