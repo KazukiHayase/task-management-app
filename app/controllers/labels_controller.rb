@@ -7,10 +7,12 @@ class LabelsController < ApplicationController
     def create
         @label = Label.new(label_params)
         @labels = Label.all
+
         if @label.save
             flash[:success] = "ラベルを作成しました！"
             redirect_to labels_path
         else
+            flash[:danger] = "ラベルの作成に失敗しました"
             render "index"
         end
     end
