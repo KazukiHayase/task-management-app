@@ -1,0 +1,8 @@
+<h2>Not Found</h2>
+<p>お探しのページは見つかりませんでした</p>
+
+<% if logged_in? %>
+    <u><%= link_to "タスク一覧ページへ戻る", tasks_path %></u>
+<% else %>
+    <u><%= link_to "ログイン画面へ", login_path %></u>
+<% end %>

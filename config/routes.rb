@@ -10,4 +10,5 @@ Rails.application.routes.draw do
   scope :admin do
     resources :users
   end
+  match '*path' , to: 'application#routing_error', via: :all
 end
